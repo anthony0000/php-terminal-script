@@ -1,0 +1,96 @@
+$primary: #3b434e;
+$secondary: '';
+$tertiary: #cfcfcf;
+$default_width: 100%;
+$font : 'Alumni Sans Pinstripe', sans-serif;
+$font2: 'Lato';
+$fontsize: 16px;
+$radius: 5px;
+
+body,html{
+    background: $primary;
+    font-family: $font;
+}
+.app-name{
+    color: $tertiary;
+    font-weight: bold;
+    letter-spacing: 2px;
+    padding-top: 20px;
+    margin-bottom: 40px;
+    text-transform: capitalize;
+    font-size: $fontsize + 40px;
+}
+.acf-holder{
+    padding-left: 20px;
+}
+.accepted-files-txt{
+    color: #a9acb1;
+    font-family: $font2;
+    font-size: $fontsize + 5;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+@-webkit-keyframes wiggle {
+    0% {-webkit-transform: rotate(10deg);}
+    25% {-webkit-transform: rotate(-10deg);}
+    50% {-webkit-transform: rotate(20deg);}
+    75% {-webkit-transform: rotate(-5deg);}
+    100% {-webkit-transform: rotate(0deg);}
+}
+
+@-ms-keyframes wiggle {
+    0% {-ms-transform: rotate(1deg);}
+    25% {-ms-transform: rotate(-1deg);}
+    50% {-ms-transform: rotate(1.5deg);}
+    75% {-ms-transform: rotate(-5deg);}
+    100% {-ms-transform: rotate(0deg);}
+}
+
+@keyframes wiggle {
+    0% {transform: rotate(10deg);}
+    25% {transform: rotate(-10deg);}
+    50% {transform: rotate(20deg);}
+    75% {transform: rotate(-5deg);}
+    100% {transform: rotate(0deg);}
+}
+.af-icon{
+    border-radius: $radius;
+    height: 100px;
+    width: 80px;
+    border-width: 3.5px;
+    border-color: $tertiary;
+    border-style: solid;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-top-right-radius: $radius + 20;
+    margin-left: 20px;
+    -webkit-animation-name: wiggle;
+    -ms-animation-name: wiggle;
+    -webkit-animation-duration: 2000ms;
+    -webkit-animation-iteration-count: 1;
+    -ms-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in-out;
+    -ms-animation-timing-function: ease-in-out;
+    cursor: pointer;
+    &.xsml{
+        border-color: #6f8dc9;
+        color: #82a2e2;
+        background: #144d3b;
+    }
+    &.tsv{
+        border-color: #7669eb;
+        color: #9890e6;
+        background: #68085b;
+    }
+    &.csv{
+        border-color: #b641b6;
+        color: #c950c9;
+        background: #1c1050;
+    }
+    h6{
+        font-family: $font2;
+    }
+}

@@ -1,0 +1,101 @@
+body, html {
+  background: #3b434e;
+  font-family: "Alumni Sans Pinstripe", sans-serif;
+}
+
+.app-name {
+  color: #cfcfcf;
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding-top: 20px;
+  margin-bottom: 40px;
+  text-transform: capitalize;
+  font-size: 56px;
+}
+
+.acf-holder {
+  padding-left: 20px;
+}
+
+.accepted-files-txt {
+  color: #a9acb1;
+  font-family: "Lato";
+  font-size: 21px;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+@-webkit-keyframes wiggle {
+  0% {
+    -webkit-transform: rotate(10deg);
+  }
+  25% {
+    -webkit-transform: rotate(-10deg);
+  }
+  50% {
+    -webkit-transform: rotate(20deg);
+  }
+  75% {
+    -webkit-transform: rotate(-5deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+  }
+}
+@keyframes wiggle {
+  0% {
+    transform: rotate(10deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.af-icon {
+  border-radius: 5px;
+  height: 100px;
+  width: 80px;
+  border-width: 3.5px;
+  border-color: #cfcfcf;
+  border-style: solid;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  border-top-right-radius: 25px;
+  margin-left: 20px;
+  -webkit-animation-name: wiggle;
+  -ms-animation-name: wiggle;
+  -webkit-animation-duration: 2000ms;
+  -webkit-animation-iteration-count: 1;
+  -ms-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-in-out;
+  -ms-animation-timing-function: ease-in-out;
+  cursor: pointer;
+}
+.af-icon.xsml {
+  border-color: #6f8dc9;
+  color: #82a2e2;
+  background: #144d3b;
+}
+.af-icon.tsv {
+  border-color: #7669eb;
+  color: #9890e6;
+  background: #68085b;
+}
+.af-icon.csv {
+  border-color: #b641b6;
+  color: #c950c9;
+  background: #1c1050;
+}
+.af-icon h6 {
+  font-family: "Lato";
+}/*# sourceMappingURL=style.css.map */
