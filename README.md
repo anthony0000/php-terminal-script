@@ -1,1 +1,1 @@
-"# bigphone_interview" 
+RUN "php parser.php -help"

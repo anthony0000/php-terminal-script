@@ -1,9 +1,49 @@
 body, html {
-  background: #3b434e;
+  background: #52555B;
   font-family: "Alumni Sans Pinstripe", sans-serif;
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #cfcfcf;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #52555B;
+}
+
+#snow {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.snowflake {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(#949494, #646363); /* Workaround for Chromium's selective color inversion */
+  border-radius: 50%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 .app-name {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   color: #cfcfcf;
   font-weight: bold;
   letter-spacing: 2px;
@@ -18,10 +58,15 @@ body, html {
 }
 
 .accepted-files-txt {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding-left: 20px;
   color: #a9acb1;
   font-family: "Lato";
   font-size: 21px;
-  padding-left: 20px;
   margin-bottom: 20px;
 }
 
@@ -60,9 +105,15 @@ body, html {
   }
 }
 .af-icon {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  height: 100px;
-  width: 80px;
+  height: 90px;
+  width: 70px;
   border-width: 3.5px;
   border-color: #cfcfcf;
   border-style: solid;
@@ -80,6 +131,7 @@ body, html {
   -webkit-animation-timing-function: ease-in-out;
   -ms-animation-timing-function: ease-in-out;
   cursor: pointer;
+  z-index: 1;
 }
 .af-icon.xsml {
   border-color: #6f8dc9;
@@ -96,6 +148,112 @@ body, html {
   color: #c950c9;
   background: #1c1050;
 }
+.af-icon.json {
+  border-color: #b8b8b8;
+  color: #cfcfcf;
+  background: #4b4b4b;
+}
 .af-icon h6 {
   font-family: "Lato";
+}
+
+.actions-details {
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  height: 180px;
+  width: 65%;
+  background: rgba(54, 54, 54, 0.842);
+  position: relative;
+  z-index: 999;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  cursor: pointer;
+}
+.actions-details::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  width: 90%;
+  height: 30px;
+  z-index: 1;
+  background: #131f31;
+  margin-left: 10px;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+}
+.actions-details .hvr-details {
+  height: 11px;
+  margin-left: 30px;
+  position: absolute;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  top: -11px;
+  z-index: 9;
+  transition: all 0.3s ease;
+}
+.actions-details:hover .hvr-details {
+  height: 18px;
+  top: -18px;
+}
+.actions-details .hvr-details:nth-child(1) {
+  width: 80px;
+  background: #5dbce2;
+  left: 0px;
+}
+.actions-details .hvr-details:nth-child(2) {
+  width: 60px;
+  left: 90px;
+  background: #f5f0ab;
+}
+.actions-details:hover .hvr-details:nth-child(2) {
+  height: 24px;
+  left: 50px;
+  top: -23px;
+}
+.actions-details .hvr-details:nth-child(3) {
+  width: 60px;
+  left: 160px;
+  background: #98afb8;
+}
+.actions-details:hover .hvr-details:nth-child(3) {
+  height: 40px;
+  left: 110px;
+  top: -39px;
+}
+.actions-details .folder-helper {
+  color: #cfcfcf;
+  font-family: "Lato";
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-padding-top: 10px;
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
+}
+.actions-details .folder-helper .tfiles-txt {
+  font-family: "Alumni Sans Pinstripe", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.drag-upload-box {
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  height: 200px;
+  background: #1a1a1a;
+  width: 100%;
+  margin-top: -20px;
+  z-index: 1;
+  position: relative;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: -50px;
+}
+.drag-upload-box img {
+  height: 110px;
+  border: solid 1px #cfcfcf;
+  border-radius: 55px;
 }/*# sourceMappingURL=style.css.map */

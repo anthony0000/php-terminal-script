@@ -1,4 +1,4 @@
-$primary: #3b434e;
+$primary: #52555B;
 $secondary: '';
 $tertiary: #cfcfcf;
 $default_width: 100%;
@@ -7,11 +7,59 @@ $font2: 'Lato';
 $fontsize: 16px;
 $radius: 5px;
 
+@mixin boxshadows {
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,.2);
+}
+@mixin genpadding {
+    padding: {
+        left: 20px
+    };
+}
+@mixin noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 body,html{
     background: $primary;
     font-family: $font;
 }
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px $tertiary; 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: black; 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: $primary; 
+}
+#snow{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.snowflake {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: linear-gradient(#949494, #646363); /* Workaround for Chromium's selective color inversion */
+    border-radius: 50%;
+    border-top-left-radius: $radius;
+    border-top-right-radius: $radius;
+}
+
 .app-name{
+    @include noselect;
     color: $tertiary;
     font-weight: bold;
     letter-spacing: 2px;
@@ -21,13 +69,14 @@ body,html{
     font-size: $fontsize + 40px;
 }
 .acf-holder{
-    padding-left: 20px;
+    @include genpadding;
 }
 .accepted-files-txt{
+    @include noselect;
+    @include genpadding;
     color: #a9acb1;
     font-family: $font2;
     font-size: $fontsize + 5;
-    padding-left: 20px;
     margin-bottom: 20px;
 }
 
@@ -55,9 +104,11 @@ body,html{
     100% {transform: rotate(0deg);}
 }
 .af-icon{
+    @include noselect;
+    @include boxshadows;
     border-radius: $radius;
-    height: 100px;
-    width: 80px;
+    height: 90px;
+    width: 70px;
     border-width: 3.5px;
     border-color: $tertiary;
     border-style: solid;
@@ -66,7 +117,9 @@ body,html{
     display: flex;
     justify-content: center;
     border-top-right-radius: $radius + 20;
-    margin-left: 20px;
+    margin: {
+        left: 20px
+    };
     -webkit-animation-name: wiggle;
     -ms-animation-name: wiggle;
     -webkit-animation-duration: 2000ms;
@@ -75,6 +128,7 @@ body,html{
     -webkit-animation-timing-function: ease-in-out;
     -ms-animation-timing-function: ease-in-out;
     cursor: pointer;
+    z-index: 1;
     &.xsml{
         border-color: #6f8dc9;
         color: #82a2e2;
@@ -90,7 +144,114 @@ body,html{
         color: #c950c9;
         background: #1c1050;
     }
+    &.json{
+        border-color: #b8b8b8;
+        color: #cfcfcf;
+        background: #4b4b4b;
+    }
     h6{
         font-family: $font2;
+    }
+}
+.actions-details{
+    @include boxshadows;
+    height: 180px;
+    width: 65%;
+    background: rgba(54, 54, 54, 0.842);
+    position: relative;
+    z-index: 999;
+    border-bottom-left-radius: $radius + 10;
+    border-bottom-right-radius: $radius + 10;
+    border-top-right-radius: $radius + 7;
+    border-top-left-radius: $radius + 7;
+    cursor: pointer;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -30px;
+        width: 90%;
+        height: 30px;
+        z-index: 1;
+        background: #131f31;
+        margin-left: 10px;
+        border-top-right-radius: $radius + 7;
+        border-top-left-radius: $radius + 7;
+    }
+    .hvr-details{
+        height: 11px;
+        margin-left: 30px;
+        position: absolute;
+        border-top-left-radius: $radius;
+        border-top-right-radius: $radius;
+        top: -11px;
+        z-index: 9;
+        transition: all .3s ease;
+    }
+    &:hover .hvr-details{
+        height: 18px;
+        top: -18px;
+    }
+    .hvr-details:nth-child(1){
+        width: 80px;
+        background: #5dbce2;
+        left: 0px;
+    }
+    .hvr-details:nth-child(2){
+        width: 60px;
+        left: 90px;
+        background: #f5f0ab;
+    }
+    &:hover .hvr-details:nth-child(2){
+        height: 24px;
+        left: 50px;
+        top: -23px;
+    }
+    .hvr-details:nth-child(3){
+        width: 60px;
+        left: 160px;
+        background: #98afb8;
+    }
+    &:hover .hvr-details:nth-child(3){
+        height: 40px;
+        left: 110px;
+        top: -39px;
+    }
+    .folder-helper{
+        color: $tertiary;
+        font-family: $font2;
+        padding: {
+            left: 10px;
+            right: 10px;
+            padding-top: 10px
+        };
+        position: absolute;
+        width: 100%;
+        bottom: 10px;
+        .tfiles-txt{
+            font-family: $font;
+            font-size: $fontsize + 8;
+            font-weight: bold;
+        }
+    }
+}
+.drag-upload-box{
+    @include boxshadows;
+    height: 200px;
+    background: #1a1a1a;
+    width: 100%;
+    margin-top: -20px;
+    z-index: 1;
+    position: relative;
+    border-radius: $radius + 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: -50px;
+    img{
+        height: 110px;
+        border: solid 1px $tertiary;
+        border-radius: $radius + 50;
     }
 }
