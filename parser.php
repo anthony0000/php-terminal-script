@@ -11,39 +11,51 @@ class PerformAction {
                         $firstFile = FOLDER.$args[2];
                         $secondFile = FOLDER.$ccmd[1];
                         // check file format validation
-
-                        if(file_exists($secondFile)){
-                            $csv = array_map('str_getcsv', file($firstFile));
-                            $csv2 = array_map('str_getcsv', file($secondFile));
-                            $filteredArray = array();
-                            foreach ($csv2 as $key => $value) {
-                                $onlyCreated = $csv2[$key];
-                                $filteredArray[] = $onlyCreated;
+                        function verifyBothFormats($file1,$file2){
+                            $firstArr = explode('.',$file1);
+                            $secondArr = explode('.',$file2);
+                            
+                            if($firstArr[1] == 'csv' && $secondArr[1] == 'csv'){
+                                return true;
+                            }else{
+                                return false;
                             }
-                            foreach ($csv as $key => $value) {
-                                $onlyCreated = $csv[$key];
-                                $filteredArray[] = $onlyCreated;
+                        }
+                        if(verifyBothFormats($firstFile,$secondFile) == true){
+                            if(file_exists($secondFile)){
+                                $csv = array_map('str_getcsv', file($firstFile));
+                                $csv2 = array_map('str_getcsv', file($secondFile));
+                                $filteredArray = array();
+                                foreach ($csv2 as $key => $value) {
+                                    $onlyCreated = $csv2[$key];
+                                    $filteredArray[] = $onlyCreated;
+                                }
+                                foreach ($csv as $key => $value) {
+                                    $onlyCreated = $csv[$key];
+                                    $filteredArray[] = $onlyCreated;
+                                }
+                                $filteredArray = array_intersect_key($filteredArray, array_unique(array_map('serialize', $filteredArray)));
+                                function randomString($length = 7) {
+                                    return substr(str_shuffle(implode(array_merge(range('a','z'), range(0,9)))), 0, $length);
+                                }
+                                $generateNewFileName = randomString(7);
+                                $toBeCreatedFileName = 'unique_'.$generateNewFileName.'.csv';
+                                header('Content-Type: text/csv');
+                                header('Content-Disposition: attachment; filename='.$toBeCreatedFileName);
+                                if(file_exists(FOLDER.$toBeCreatedFileName)){
+                                    unlink(FOLDER.$toBeCreatedFileName);
+                                }
+                                $fp = fopen(FOLDER.$toBeCreatedFileName, 'wb');
+                                foreach ( $filteredArray as $line ) {
+                                    fputcsv($fp, $line);
+                                }
+                                fclose($fp);
+                                echo '---- check the newly created file here: '.FOLDER.$toBeCreatedFileName;
+                            }else{
+                                throw new Exception("File not found");
                             }
-                            $filteredArray = array_intersect_key($filteredArray, array_unique(array_map('serialize', $filteredArray)));
-                            function randomString($length = 7) {
-                                return substr(str_shuffle(implode(array_merge(range('a','z'), range(0,9)))), 0, $length);
-                            }
-                            $generateNewFileName = randomString(7);
-                            $toBeCreatedFileName = 'unique_'.$generateNewFileName.'.csv';
-                            header('Content-Type: text/csv');
-                            header('Content-Disposition: attachment; filename='.$toBeCreatedFileName);
-                            if(file_exists(FOLDER.$toBeCreatedFileName)){
-                                unlink(FOLDER.$toBeCreatedFileName);
-                            }
-                            $fp = fopen(FOLDER.$toBeCreatedFileName, 'wb');
-                            foreach ( $filteredArray as $line ) {
-                                fputcsv($fp, $line);
-                            }
-                            fclose($fp);
-
-                            echo 'check the newly created file here: '.FOLDER.$toBeCreatedFileName;
                         }else{
-                            throw new Exception("File not found");
+                            echo "Invalid File Combinations";
                         }
                     }
                 }else{
@@ -92,7 +104,8 @@ Note : to avoid memory limit error, please go to this directory if you are using
 wamp (C:\wamp64\bin\php\php_ver\php.ini), if you are using xampp (C:\xampp\apache\bin\php.ini)
 then update (memory_limit = 32M) to (memory_limit = -1)
 ----------------------------------------------------------------------------------------------
-this are the following list of valid commands and their purposes "\r\n"
+this are the following list of valid commands and their purposes
+
 php parser.php --list (to list names of available files to perform a query with)
 php parser.php --folder (to show the name of the current folder where the files are kept)
 php parser.php --help (to list all possible valid commands)
