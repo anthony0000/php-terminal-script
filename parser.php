@@ -112,6 +112,7 @@ php parser.php --help (to list all possible valid commands)
 php parser.php --createfolder (to create a Folder/Directory)
 php parser.php --createfile (to create a File)
 php parser.php --file (scan a given file and displays an array of information in the given file)
+php parser.php --file (filename) --unique-combinations=(filename) (scan a given file and displays an array of information in the given file)
                 ';
             }else if($args[1] == '--folder' || $args[1] == '-folder'){
                 echo FOLDER;
